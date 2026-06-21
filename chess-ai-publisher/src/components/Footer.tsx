@@ -22,15 +22,15 @@ export default function Footer({ lang }: FooterProps) {
             <h4>{t('footer.nav', lang)}</h4>
             <a href="#catalog">{t('footer.catalog', lang)}</a>
             <a href="#educational">{t('footer.educational', lang)}</a>
-            <a href="#cyberchess">CiberAjedrez</a>
+            <a href="#cyberchess">{t('footer.cyberchess', lang)}</a>
             <a href="#author">{t('footer.author', lang)}</a>
           </div>
           <div className="footer-col">
             <h4>{t('footer.products', lang)}</h4>
-            <a href="https://amzn.to/3u2HTvR" target="_blank" rel="noopener">Ajedrez 1er Grado</a>
-            <a href="https://amzn.to/3cBY6Cq" target="_blank" rel="noopener">Ajedrez 2º Grado</a>
-            <a href="https://amzn.to/3u7mDoy" target="_blank" rel="noopener">Ajedrez 3er Grado</a>
-            <a href="https://amzn.to/3cyaqmY" target="_blank" rel="noopener">Ajedrez 4º Grado</a>
+            <a href="https://amzn.to/3u2HTvR" target="_blank" rel="noopener">{t('footer.product1', lang)}</a>
+            <a href="https://amzn.to/3cBY6Cq" target="_blank" rel="noopener">{t('footer.product2', lang)}</a>
+            <a href="https://amzn.to/3u7mDoy" target="_blank" rel="noopener">{t('footer.product3', lang)}</a>
+            <a href="https://amzn.to/3cyaqmY" target="_blank" rel="noopener">{t('footer.product4', lang)}</a>
           </div>
           <div className="footer-col">
             <h4>{t('footer.contact', lang)}</h4>

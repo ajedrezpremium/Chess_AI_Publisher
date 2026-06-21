@@ -28,7 +28,7 @@ export default function GamificationPanel({ lang, points, open, onClose }: Gamif
         <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: 24 }}>{t('gamification.points', lang)}</div>
         <div style={{ margin: '24px 0' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 8 }}>
-            <span>{t('gamification.level', lang).replace('2', String(level)).replace('Aprendiz', levelName)}</span>
+            <span>{t('gamification.level', lang).replace('{level}', String(level)).replace('{name}', levelName)}</span>
             <span>{points} / {nextLevel} {t('gamification.toNext', lang)}</span>
           </div>
           <div style={{ height: 8, background: 'var(--bg-secondary)', borderRadius: 4, overflow: 'hidden' }}>

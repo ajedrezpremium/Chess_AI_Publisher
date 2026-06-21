@@ -29,7 +29,7 @@ export default function Header({ lang, points, onLangChange, onGamificationOpen 
           <div className="logo-icon">♚</div>
           <span>JREDITION</span>
         </a>
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label={t('header.menu', lang)}>
           <span /><span /><span />
         </button>
         <nav className={`nav${menuOpen ? ' open' : ''}`}>
@@ -46,7 +46,7 @@ export default function Header({ lang, points, onLangChange, onGamificationOpen 
               onClick={() => onLangChange(l.code)}>{l.label}</button>
           ))}
           <div className="gamification-badge" onClick={onGamificationOpen}>
-            ⭐ {points} pts
+            ⭐ {points} {t('header.points', lang)}
           </div>
           <button className="btn-login">{t('header.login', lang)}</button>
         </div>
