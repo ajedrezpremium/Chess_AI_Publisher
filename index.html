@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JREDITION - Editorial Internacional de Ajedrez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #1a1a25;
+  --bg-card-hover: #222233;
+  --gold: #d4a843;
+  --gold-light: #f0d080;
+  --gold-dark: #b8922e;
+  --text-primary: #f0ece4;
+  --text-secondary: #a09888;
+  --text-muted: #6a6558;
+  --accent-blue: #3b82f6;
+  --accent-green: #22c55e;
+  --accent-red: #ef4444;
+  --border-color: #2a2a3a;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+::selection { background: var(--gold); color: #000; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+a { color: var(--gold); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--gold-light); }
+img { max-width: 100%; display: block; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Header ===== */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10,10,15,0.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+header.scrolled { background: rgba(10,10,15,0.95); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; padding: 0 24px; max-width: 1280px; margin: 0 auto;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 1.5rem; color: var(--gold);
+}
+.logo-icon {
+  width: 40px; height: 40px; background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: #000; font-weight: 900;
+}
+nav { display: flex; align-items: center; gap: 4px; }
+nav a {
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  color: var(--text-secondary); font-size: 0.875rem; font-weight: 500;
+  transition: var(--transition); position: relative;
+}
+nav a:hover, nav a.active { color: var(--gold); background: rgba(212,168,67,0.1); }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.lang-btn {
+  background: none; border: 1px solid var(--border-color); color: var(--text-secondary);
+  padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 600;
+  transition: var(--transition); font-family: inherit;
+}
+.lang-btn:hover, .lang-btn.active { border-color: var(--gold); color: var(--gold); }
+.gamification-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: #000; padding: 6px 14px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700; cursor: pointer;
+  transition: var(--transition);
+}
+.gamification-badge:hover { transform: scale(1.05); }
+.btn-login {
+  background: var(--gold); color: #000; border: none;
+  padding: 8px 20px; border-radius: 8px; font-weight: 700; font-size: 0.8rem;
+  cursor: pointer; transition: var(--transition); font-family: inherit;
+}
+.btn-login:hover { background: var(--gold-light); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { width: 24px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden; padding-top: 72px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(212,168,67,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(34,197,94,0.03) 0%, transparent 50%);
+  z-index: 0;
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.chess-piece {
+  position: absolute; font-size: 4rem; opacity: 0.03;
+  animation: float 20s infinite ease-in-out; z-index: 0;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-30px) rotate(5deg); }
+  66% { transform: translateY(15px) rotate(-3deg); }
+}
+.hero-content {
+  position: relative; z-index: 1; max-width: 800px; padding: 80px 0;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(212,168,67,0.15); border: 1px solid rgba(212,168,67,0.3);
+  padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; color: var(--gold);
+  margin-bottom: 24px; font-weight: 500;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;
+  margin-bottom: 16px;
+}
+.hero h1 span { background: linear-gradient(135deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p {
+  font-size: 1.125rem; color: var(--text-secondary); max-width: 600px;
+  margin-bottom: 40px; line-height: 1.8;
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #000; padding: 16px 32px; border-radius: 12px;
+  font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
+  transition: var(--transition); font-family: inherit; text-decoration: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,67,0.3); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text-primary);
+  padding: 16px 32px; border-radius: 12px;
+  font-weight: 600; font-size: 1rem; border: 1px solid var(--border-color); cursor: pointer;
+  transition: var(--transition); font-family: inherit; text-decoration: none;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.hero-stats {
+  display: flex; gap: 48px; margin-top: 60px; padding-top: 40px;
+  border-top: 1px solid var(--border-color);
+}
+.hero-stat h3 { font-size: 2rem; font-weight: 800; color: var(--gold); }
+.hero-stat p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+
+/* ===== Sections ===== */
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(212,168,67,0.1);
+  padding: 6px 16px; border-radius: 100px; font-size: 0.75rem;
+  color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px;
+}
+.section-subtitle { color: var(--text-secondary); font-size: 1.05rem; max-width: 640px; margin-bottom: 48px; }
+
+/* ===== Catalog Filters ===== */
+.catalog-filters {
+  display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.filter-btn {
+  background: transparent; border: 1px solid var(--border-color);
+  color: var(--text-secondary); padding: 10px 24px; border-radius: 100px;
+  font-size: 0.85rem; font-weight: 500; cursor: pointer;
+  transition: var(--transition); font-family: inherit;
+}
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+
+/* ===== Product Cards ===== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.product-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius); overflow: hidden;
+  transition: var(--transition); cursor: pointer; position: relative;
+}
+.product-card:hover {
+  transform: translateY(-8px); border-color: var(--gold);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  background: var(--bg-card-hover);
+}
+.product-card-image {
+  height: 240px; background: var(--bg-secondary);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.product-card-image .cover-placeholder {
+  font-size: 4rem; opacity: 0.2;
+}
+.product-card-image .level-badge {
+  position: absolute; top: 12px; right: 12px;
+  padding: 4px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;
+}
+.level-beginner { background: rgba(34,197,94,0.2); color: #22c55e; }
+.level-intermediate { background: rgba(59,130,246,0.2); color: #3b82f6; }
+.level-advanced { background: rgba(239,68,68,0.2); color: #ef4444; }
+.level-professional { background: rgba(212,168,67,0.2); color: var(--gold); }
+.product-card-body { padding: 20px; }
+.product-card-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.product-card-body .desc { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.product-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-top: 1px solid var(--border-color);
+}
+.product-price { font-size: 1.2rem; font-weight: 800; color: var(--gold); }
+.product-rating { font-size: 0.8rem; color: var(--gold); }
+.buy-btn {
+  background: var(--gold); color: #000; border: none;
+  padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 0.8rem;
+  cursor: pointer; transition: var(--transition); font-family: inherit; text-decoration: none;
+}
+.buy-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+
+/* ===== Author ===== */
+.author-section {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+.author-content {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.author-image {
+  width: 100%; aspect-ratio: 1; border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 6rem; position: relative; overflow: hidden;
+}
+.author-image::after {
+  content: ''; position: absolute; inset: 3px;
+  background: var(--bg-secondary); border-radius: calc(var(--radius) - 3px);
+}
+.author-image span { position: relative; z-index: 2; }
+.author-info h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 8px; }
+.author-info .title { color: var(--gold); font-weight: 600; margin-bottom: 16px; }
+.author-info .bio { color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
+.author-stats { display: flex; gap: 32px; }
+.author-stat h4 { font-size: 1.5rem; color: var(--gold); }
+.author-stat p { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ===== Projects ===== */
+.projects-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;
+}
+.project-card {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius); padding: 32px;
+  transition: var(--transition);
+}
+.project-card:hover {
+  border-color: var(--gold); transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.project-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.project-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.project-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+
+/* ===== Footer ===== */
+footer {
+  background: var(--bg-secondary); border-top: 1px solid var(--border-color);
+  padding: 60px 0 40px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+}
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-brand p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; max-width: 320px; }
+.footer-col h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px; }
+.footer-col a {
+  display: block; color: var(--text-secondary); font-size: 0.85rem;
+  padding: 4px 0; transition: var(--transition);
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom {
+  margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; color: var(--text-muted);
+}
+.social-links { display: flex; gap: 12px; }
+.social-links a {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); transition: var(--transition); font-size: 0.85rem;
+}
+.social-links a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+
+/* ===== AI Chat Widget ===== */
+.chat-widget {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  font-family: 'Inter', sans-serif;
+}
+.chat-toggle {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(212,168,67,0.4);
+  transition: var(--transition); position: relative;
+}
+.chat-toggle:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(212,168,67,0.5); }
+.chat-toggle .icon { font-size: 1.5rem; color: #000; }
+.chat-toggle .badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #ef4444; color: #fff; font-size: 0.65rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+.chat-panel {
+  position: absolute; bottom: 80px; right: 0;
+  width: 400px; max-width: calc(100vw - 48px);
+  height: 560px; max-height: calc(100vh - 180px);
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  display: none; flex-direction: column; overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.chat-panel.open { display: flex; }
+.chat-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border-color);
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, var(--bg-card), #1e1e30);
+}
+.chat-header .avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 1rem; color: #000; flex-shrink: 0;
+}
+.chat-header .info { flex: 1; }
+.chat-header .info h4 { font-size: 0.95rem; font-weight: 700; }
+.chat-header .info p { font-size: 0.75rem; color: var(--text-muted); }
+.chat-header .close-btn {
+  background: none; border: none; color: var(--text-secondary); cursor: pointer;
+  font-size: 1.2rem; transition: var(--transition);
+}
+.chat-header .close-btn:hover { color: var(--text-primary); }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.message {
+  max-width: 85%; padding: 12px 16px; border-radius: 12px;
+  font-size: 0.875rem; line-height: 1.5; animation: msgIn 0.3s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.message.bot {
+  align-self: flex-start;
+  background: var(--bg-secondary); border: 1px solid var(--border-color);
+  border-bottom-left-radius: 4px;
+}
+.message.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #000; border-bottom-right-radius: 4px;
+}
+.message .msg-time {
+  font-size: 0.65rem; opacity: 0.5; margin-top: 4px;
+}
+.message.bot .msg-time { color: var(--text-muted); }
+.chat-input-area {
+  padding: 12px 16px; border-top: 1px solid var(--border-color);
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.chat-input-area textarea {
+  flex: 1; background: var(--bg-secondary); border: 1px solid var(--border-color);
+  border-radius: 10px; padding: 10px 14px; color: var(--text-primary);
+  font-family: inherit; font-size: 0.85rem; resize: none; outline: none;
+  min-height: 44px; max-height: 100px;
+}
+.chat-input-area textarea:focus { border-color: var(--gold); }
+.chat-input-area .send-btn {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--gold); color: #000; border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: var(--transition); font-size: 1rem;
+  flex-shrink: 0;
+}
+.chat-input-area .send-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+.chat-input-area .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.quick-replies {
+  display: flex; gap: 6px; padding: 8px 16px 4px;
+  flex-wrap: wrap; border-top: 1px solid var(--border-color);
+}
+.quick-reply {
+  padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border-color);
+  background: transparent; color: var(--text-secondary); font-size: 0.75rem;
+  cursor: pointer; transition: var(--transition); font-family: inherit;
+}
+.quick-reply:hover { border-color: var(--gold); color: var(--gold); }
+.chat-typing {
+  display: flex; align-items: center; gap: 4px;
+  padding: 12px 16px; align-self: flex-start;
+  background: var(--bg-secondary); border-radius: 12px;
+  border: 1px solid var(--border-color); border-bottom-left-radius: 4px;
+}
+.chat-typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--text-muted); animation: typing 1.4s infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+  z-index: 5000; display: none; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius); max-width: 600px; width: 100%;
+  max-height: 80vh; overflow-y: auto; padding: 32px;
+  animation: slideUp 0.3s ease;
+}
+.modal-close {
+  float: right; background: none; border: none; color: var(--text-secondary);
+  font-size: 1.5rem; cursor: pointer; transition: var(--transition);
+}
+.modal-close:hover { color: var(--text-primary); }
+.modal h2 { font-family: 'Playfair Display', serif; margin-bottom: 8px; }
+.modal .price { font-size: 1.5rem; color: var(--gold); font-weight: 800; margin: 16px 0; }
+.modal .desc { color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
+.modal .buy-btn { font-size: 1rem; padding: 12px 28px; }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 100px; right: 24px; z-index: 9998;
+  background: var(--bg-card); border: 1px solid var(--gold); border-radius: 12px;
+  padding: 16px 20px; box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 12px;
+  animation: slideIn 0.4s ease; font-size: 0.85rem;
+  max-width: 360px;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.toast .icon { font-size: 1.5rem; }
+
+/* ===== Gamification Panel ===== */
+.gamification-panel {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 5001; display: none;
+}
+.gamification-panel.open { display: block; }
+.gamification-content {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius); padding: 40px; min-width: 340px;
+  box-shadow: var(--shadow); animation: slideUp 0.3s ease;
+}
+.gamification-content h2 { font-family: 'Playfair Display', serif; margin-bottom: 24px; }
+.gamification-content .points { font-size: 3rem; color: var(--gold); font-weight: 900; text-align: center; }
+.gamification-content .points-label { text-align: center; color: var(--text-muted); margin-bottom: 24px; }
+.badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.badge-item {
+  text-align: center; padding: 16px; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border-color);
+  min-width: 90px;
+}
+.badge-item.locked { opacity: 0.3; }
+.badge-item .icon { font-size: 2rem; }
+.badge-item .name { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 968px) {
+  nav { display: none; }
+  nav.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-primary); border-bottom: 1px solid var(--border-color); padding: 16px; gap: 4px; }
+  .hamburger { display: flex; }
+  .author-content { grid-template-columns: 1fr; gap: 32px; }
+  .author-image { max-width: 300px; margin: 0 auto; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 640px) {
+  .header-inner { padding: 0 16px; }
+  .header-right .btn-login { display: none; }
+  .hero h1 { font-size: 2rem; }
+  .section { padding: 60px 0; }
+  .products-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .chat-panel { width: calc(100vw - 32px); right: -16px; }
+  .hero-stat h3 { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">♚</div>
+      <span>JREDITION</span>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav">
+      <a href="#hero" class="active" data-i18n="nav.home">Inicio</a>
+      <a href="#catalog" data-i18n="nav.catalog">Catálogo</a>
+      <a href="#educational" data-i18n="nav.educational">Proyecto Educativo</a>
+      <a href="#cyberchess" data-i18n="nav.cyberchess">CiberAjedrez</a>
+      <a href="#author" data-i18n="nav.author">Autor</a>
+      <a href="#contact" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="header-right">
+      <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" data-lang="gl" onclick="setLang('gl')">GL</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <div class="gamification-badge" onclick="toggleGamification()">
+        ⭐ <span id="pointsDisplay">150</span> pts
+      </div>
+      <button class="btn-login" data-i18n="header.login">Entrar</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="chess-piece" style="top:15%;left:8%;font-size:6rem;">♔</div>
+  <div class="chess-piece" style="top:60%;right:10%;font-size:5rem;animation-duration:25s;">♛</div>
+  <div class="chess-piece" style="top:30%;right:20%;font-size:3rem;animation-duration:18s;">♞</div>
+  <div class="chess-piece" style="bottom:20%;left:15%;font-size:4rem;animation-duration:22s;">♝</div>
+
+  <div class="container hero-content">
+    <div class="hero-badge">✨ <span data-i18n="hero.badge">Fundada en 2003 · Editorial Internacional</span></div>
+    <h1><span data-i18n="hero.title1">Donde el Ajedrez</span><br><span data-i18n="hero.title2">se Convierte en Ciencia</span></h1>
+    <p data-i18n="hero.subtitle">Más de 20 años formando campeones desde la escuela hasta la maestría. Descubre la colección más completa de ajedrez educativo en español.</p>
+    <div class="hero-buttons">
+      <a href="#catalog" class="btn-primary">📚 <span data-i18n="hero.cta1">Explorar Catálogo</span></a>
+      <button class="btn-secondary" onclick="openChat()">🤖 <span data-i18n="hero.cta2">Conocer Agente IA</span></button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><h3>15</h3><p data-i18n="stat.books">Libros publicados</p></div>
+      <div class="hero-stat"><h3>22+</h3><p data-i18n="stat.years">Años de experiencia</p></div>
+      <div class="hero-stat"><h3>3000+</h3><p data-i18n="stat.students">Estudiantes formados</p></div>
+      <div class="hero-stat"><h3>+3600</h3><p data-i18n="stat.elo">Elo en motores IA</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATALOG ===== -->
+<section id="catalog" class="section">
+  <div class="container">
+    <div class="section-label" data-i18n="catalog.label">📖 Catálogo</div>
+    <h2 class="section-title" data-i18n="catalog.title">Nuestra Colección</h2>
+    <p class="section-subtitle" data-i18n="catalog.subtitle">Desde principiantes hasta Gran Maestría. Cada libro es un nivel en tu progresión ajedrecística.</p>
+
+    <div class="catalog-filters" id="catalogFilters">
+      <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Todos</button>
+      <button class="filter-btn" data-filter="school" data-i18n="filter.school">Ciclo Escolar</button>
+      <button class="filter-btn" data-filter="mastery" data-i18n="filter.mastery">Maestría</button>
+      <button class="filter-btn" data-filter="grandmaster" data-i18n="filter.grandmaster">Gran Maestría</button>
+      <button class="filter-btn" data-filter="projects" data-i18n="filter.projects">Proyectos</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== EDUCATIONAL PROJECT ===== -->
+<section id="educational" class="section" style="background:var(--bg-secondary);">
+  <div class="container">
+    <div class="section-label" data-i18n="edu.label">🎓 Proyecto Educativo</div>
+    <h2 class="section-title" data-i18n="edu.title">Ajedrez en la Escuela</h2>
+    <p class="section-subtitle" data-i18n="edu.subtitle">Un método progresivo de 10 volúmenes diseñado para llevar el ajedrez a las aulas, avalado por miles de estudiantes.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;">
+      <div class="project-card" style="text-align:center;">
+        <div class="project-icon">📘</div>
+        <h3 data-i18n="edu.cycle1">Ciclo Escolar</h3>
+        <p data-i18n="edu.cycle1desc">Grados 1-3 · De 0 a 1800 Elo. Reglas básicas, táctica, primeros maestros.</p>
+      </div>
+      <div class="project-card" style="text-align:center;">
+        <div class="project-icon">📗</div>
+        <h3 data-i18n="edu.cycle2">Ciclo Maestría</h3>
+        <p data-i18n="edu.cycle2desc">Grados 4-7 · De 1800 a 2200 FIDE. Aperturas, análisis profundo, semi-profesionalismo.</p>
+      </div>
+      <div class="project-card" style="text-align:center;">
+        <div class="project-icon">📕</div>
+        <h3 data-i18n="edu.cycle3">Ciclo Gran Maestría</h3>
+        <p data-i18n="edu.cycle3desc">Grados 8-10 · Épocas doradas, geopolítica, talento vs método.</p>
+      </div>
+      <div class="project-card" style="text-align:center;">
+        <div class="project-icon">🏆</div>
+        <h3 data-i18n="edu.method">Metodología propia</h3>
+        <p data-i18n="edu.methoddesc">Pedagogía digital, sinergias educativas y aprendizaje progresivo demostrado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CIBERAJEDREZ ===== -->
+<section id="cyberchess" class="section">
+  <div class="container">
+    <div class="section-label" data-i18n="cyber.label">🤖 CiberAjedrez</div>
+    <h2 class="section-title" data-i18n="cyber.title">IA + Ajedrez: El Futuro es Ahora</h2>
+    <p class="section-subtitle" data-i18n="cyber.subtitle">Motores de +3600 Elo, análisis técnico avanzado y la fusión del hombre con la máquina para alcanzar nuevos niveles de comprensión.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+      <div class="project-card">
+        <div class="project-icon">🧠</div>
+        <h3 data-i18n="cyber.card1">Análisis con IA</h3>
+        <p data-i18n="cyber.card1desc">Motores de última generación que superan los 3600 puntos Elo. Comprende cómo evalúan las posiciones.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🔄</div>
+        <h3 data-i18n="cyber.card2">Nuevos Paradigmas</h3>
+        <p data-i18n="cyber.card2desc">¿Qué pasa con el desarrollo? ¿El enroque? ¿Peones doblados? La IA replantea conceptos clásicos.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">📡</div>
+        <h3 data-i18n="cyber.card3">CHESS ORGANIZERS PRO</h3>
+        <p data-i18n="cyber.card3desc">Gestión profesional de eventos de ajedrez con tecnología de vanguardia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AUTHOR ===== -->
+<section id="author" class="section author-section">
+  <div class="container">
+    <div class="author-content">
+      <div class="author-image">
+        <span>♚</span>
+      </div>
+      <div class="author-info">
+        <div class="section-label" data-i18n="author.label">✍️ Autor</div>
+        <h2 data-i18n="author.name">Roberto Páramos Domínguez</h2>
+        <div class="title" data-i18n="author.title">Maestro Internacional de Ajedrez · Fundador de JREDITION</div>
+        <div class="bio" data-i18n="author.bio">Maestro Internacional desde 1997, con más de 30 años de experiencia profesional. Ha formado a más de 3.000 estudiantes, incluyendo 50+ jugadores con rating superior a 2200 FIDE. Creador del método "Ajedrez en la Escuela" y pionero en la integración de IA en la enseñanza del ajedrez.</div>
+        <div class="author-stats">
+          <div class="author-stat"><h4>1997</h4><p data-i18n="author.stat1">MI Title</p></div>
+          <div class="author-stat"><h4>15</h4><p data-i18n="author.stat2">Libros</p></div>
+          <div class="author-stat"><h4>3000+</h4><p data-i18n="author.stat3">Estudiantes</p></div>
+          <div class="author-stat"><h4>2003</h4><p data-i18n="author.stat4">Fundación</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">♚</div>
+          <span>JREDITION</span>
+        </div>
+        <p data-i18n="footer.desc">Editorial internacional especializada en ajedrez y ajedrez educativo. Desde 2003 formando campeones dentro y fuera del tablero.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.nav">Navegación</h4>
+        <a href="#catalog" data-i18n="footer.catalog">Catálogo</a>
+        <a href="#educational" data-i18n="footer.educational">Proyecto Educativo</a>
+        <a href="#cyberchess">CiberAjedrez</a>
+        <a href="#author" data-i18n="footer.author">Autor</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.products">Productos</h4>
+        <a href="https://amzn.to/3u2HTvR" target="_blank">Ajedrez 1er Grado</a>
+        <a href="https://amzn.to/3cBY6Cq" target="_blank">Ajedrez 2º Grado</a>
+        <a href="https://amzn.to/3u7mDoy" target="_blank">Ajedrez 3er Grado</a>
+        <a href="https://amzn.to/3cyaqmY" target="_blank">Ajedrez 4º Grado</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contacto</h4>
+        <a href="mailto:xg@xadrezgalego.net">xg@xadrezgalego.net</a>
+        <a href="tel:+34986260259">+34 986 260 259</a>
+        <a href="https://www.xadrezgalego.net" target="_blank">xadrezgalego.net</a>
+        <div class="social-links" style="margin-top:12px;">
+          <a href="https://www.youtube.com/channel/UCLsGWfmBxDuuOCRLEkVLJPA" target="_blank" aria-label="YouTube">YT</a>
+          <a href="https://instagram.com/xadrez_galego" target="_blank" aria-label="Instagram">IG</a>
+          <a href="https://www.facebook.com/Xadrezgalego/" target="_blank" aria-label="Facebook">FB</a>
+          <a href="https://twitter.com/XadrezGalegoSL" target="_blank" aria-label="Twitter">X</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 JREDITION · <span data-i18n="footer.rights">Todos los derechos reservados</span></span>
+      <span><span data-i18n="footer.made">Hecho con ♟️ para el ajedrez mundial</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== AI CHAT WIDGET ===== -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="avatar">♚</div>
+      <div class="info">
+        <h4 data-i18n="chat.name">JR Assistant</h4>
+        <p data-i18n="chat.status">Agente IA · Online</p>
+      </div>
+      <button class="close-btn" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="quick-replies" id="quickReplies">
+      <button class="quick-reply" data-i18n="chat.q1" onclick="sendQuickReply(0)">📚 Recomiéndame un libro</button>
+      <button class="quick-reply" data-i18n="chat.q2" onclick="sendQuickReply(1)">🎯 ¿Qué grado para 8 años?</button>
+      <button class="quick-reply" data-i18n="chat.q3" onclick="sendQuickReply(2)">🤖 ¿Qué es CiberAjedrez?</button>
+      <button class="quick-reply" data-i18n="chat.q4" onclick="sendQuickReply(3)">⭐ Mis puntos</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message bot">
+        <span data-i18n="chat.welcome">¡Hola! Soy el asistente IA de JREDITION. Puedo ayudarte a encontrar el libro perfecto, responder preguntas sobre ajedrez o explicarte nuestro proyecto educativo. ¿En qué puedo ayudarte?</span>
+        <div class="msg-time">Ahora</div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <textarea id="chatInput" placeholder="Escribe tu mensaje..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
+    <span class="icon">♚</span>
+    <span class="badge">1</span>
+  </button>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalLevel" style="margin:8px 0;"></div>
+    <div class="price" id="modalPrice"></div>
+    <div class="desc" id="modalDesc"></div>
+    <a class="buy-btn" id="modalBuy" href="#" target="_blank" data-i18n="modal.buy">Comprar en Amazon</a>
+  </div>
+</div>
+
+<!-- ===== GAMIFICATION MODAL ===== -->
+<div class="modal-overlay" id="gamificationOverlay" onclick="if(event.target===this)closeGamification()">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" onclick="closeGamification()">✕</button>
+    <h2 style="font-family:'Playfair Display',serif;" data-i18n="gamification.title">🏅 Tu Progreso</h2>
+    <div class="points" id="gamiPoints">150</div>
+    <div class="points-label" data-i18n="gamification.points">Puntos JREDITION</div>
+    <div style="margin:24px 0;">
+      <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">
+        <span data-i18n="gamification.level">Nivel 2 · Aprendiz</span>
+        <span>150 / 500 <span data-i18n="gamification.toNext">para siguiente nivel</span></span>
+      </div>
+      <div style="height:8px;background:var(--bg-secondary);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:30%;background:linear-gradient(90deg,var(--gold-dark),var(--gold));border-radius:4px;transition:width 0.8s ease;"></div>
+      </div>
+    </div>
+    <h4 style="font-size:0.9rem;color:var(--text-muted);margin-bottom:12px;" data-i18n="gamification.badges">Insignias</h4>
+    <div class="badges">
+      <div class="badge-item"><div class="icon">📖</div><div class="name" data-i18n="badge.reader">Lector</div></div>
+      <div class="badge-item"><div class="icon">⭐</div><div class="name" data-i18n="badge.collector">Coleccionista</div></div>
+      <div class="badge-item locked"><div class="icon">🏅</div><div class="name" data-i18n="badge.master">Maestro</div></div>
+      <div class="badge-item locked"><div class="icon">👑</div><div class="name" data-i18n="badge.gm">Gran Maestro</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== PRODUCT DATA =====
+const products = [
+  { id:1, cat:'school', title:{es:'Ajedrez 1er Grado',gl:'Xadrez 1º Grao',en:'Chess 1st Grade'}, desc:{es:'Primer volumen · 208 páginas A4 color. Reglas básicas y primeros conceptos para iniciarse en el ajedrez.',gl:'Primeiro volume · 208 páxinas A4 cor. Regras básicas e primeiros conceptos.',en:'First volume · 208 full-color A4 pages. Basic rules and first concepts.'}, price:'25,00 €', level:{es:'Principiante',gl:'Principiante',en:'Beginner'}, levelClass:'beginner', rating:'5.0', amazon:'https://amzn.to/3u2HTvR', kindle:'https://amzn.to/3rBLQ9d', emoji:'📘' },
+  { id:2, cat:'school', title:{es:'Ajedrez 2º Grado',gl:'Xadrez 2º Grao',en:'Chess 2nd Grade'}, desc:{es:'180 páginas A4 color. Primeros maestros, táctica básica, anotación y competiciones.',gl:'180 páxinas A4 cor. Primeiros mestres, táctica básica, anotación e competicións.',en:'180 full-color A4 pages. Early masters, basic tactics, notation, competitions.'}, price:'25,00 €', level:{es:'Principiante',gl:'Principiante',en:'Beginner'}, levelClass:'beginner', rating:'5.0', amazon:'https://amzn.to/3cBY6Cq', kindle:'https://amzn.to/3m53yk9', emoji:'📘' },
+  { id:3, cat:'school', title:{es:'Ajedrez 3er Grado',gl:'Xadrez 3º Grao',en:'Chess 3rd Grade'}, desc:{es:'184 páginas A4 color. Nivel ~1800 Elo. Complejidad del juego-ciencia y bagaje cultural.',gl:'184 páxinas A4 cor. Nivel ~1800 Elo. Complexidade do xogo-ciencia.',en:'184 full-color A4 pages. ~1800 Elo level. Depth of the game-science.'}, price:'25,00 €', level:{es:'Intermedio',gl:'Intermedio',en:'Intermediate'}, levelClass:'intermediate', rating:'5.0', amazon:'https://amzn.to/3u7mDoy', kindle:'https://amzn.to/3djfVoP', emoji:'📘' },
+  { id:4, cat:'mastery', title:{es:'Ajedrez 4º Grado',gl:'Xadrez 4º Grao',en:'Chess 4th Grade'}, desc:{es:'Segundo ciclo. Análisis profundo, exigencia competitiva y visión estratégica.',gl:'Segundo ciclo. Análise profunda, esixencia competitiva.',en:'Second cycle. Deep analysis, competitive demands.'}, price:'27,00 €', level:{es:'Intermedio',gl:'Intermedio',en:'Intermediate'}, levelClass:'intermediate', rating:'5.0', amazon:'https://amzn.to/3cyaqmY', kindle:'https://amzn.to/3w5OUhj', emoji:'📗' },
+  { id:5, cat:'mastery', title:{es:'Ajedrez 5º Grado',gl:'Xadrez 5º Grao',en:'Chess 5th Grade'}, desc:{es:'221 páginas. Aperturas, informática, idiomas y análisis de partidas.',gl:'221 páxinas. Aperturas, informática, idiomas.',en:'221 pages. Openings, computers, languages, game analysis.'}, price:'27,00 €', level:{es:'Intermedio',gl:'Intermedio',en:'Intermediate'}, levelClass:'intermediate', rating:'5.0', amazon:'https://amzn.to/3cAbYgs', kindle:'https://amzn.to/3rvzfV3', emoji:'📗' },
+  { id:6, cat:'mastery', title:{es:'Ajedrez 6º Grado',gl:'Xadrez 6º Grao',en:'Chess 6th Grade'}, desc:{es:'250 páginas. Camino hacia los 2200 FIDE. 180 partidas analizadas.',gl:'250 páxinas. Camiño cara os 2200 FIDE. 180 partidas analizadas.',en:'250 pages. Path to 2200 FIDE. 180 analyzed games.'}, price:'30,00 €', level:{es:'Avanzado',gl:'Avanzado',en:'Advanced'}, levelClass:'advanced', rating:'5.0', amazon:'https://amzn.to/3wehTPO', kindle:'https://amzn.to/2PDMC8g', emoji:'📗' },
+  { id:7, cat:'mastery', title:{es:'Ajedrez 7º Grado',gl:'Xadrez 7º Grao',en:'Chess 7th Grade'}, desc:{es:'Introducción al semi-profesionalismo. Voz autorizada a nivel técnico internacional.',gl:'Introdución ao semi-profesionalismo.',en:'Introduction to semi-professionalism.'}, price:'30,00 €', level:{es:'Avanzado',gl:'Avanzado',en:'Advanced'}, levelClass:'advanced', rating:'5.0', amazon:'https://amzn.to/39rVJzY', kindle:'https://amzn.to/3dfwT7G', emoji:'📗' },
+  { id:8, cat:'grandmaster', title:{es:'Ajedrez 8º Grado',gl:'Xadrez 8º Grao',en:'Chess 8th Grade'}, desc:{es:'Era de Tal, Petrosian, Spassky. Más de 200 páginas de análisis profundo.',gl:'Era de Tal, Petrosian, Spassky.',en:'Tal, Petrosian, Spassky era. 200+ pages.'}, price:'30,00 €', level:{es:'Avanzado',gl:'Avanzado',en:'Advanced'}, levelClass:'advanced', rating:'5.0', amazon:'https://amzn.to/2O6OLcj', kindle:'https://amzn.to/3u7faWF', emoji:'📕' },
+  { id:9, cat:'grandmaster', title:{es:'Ajedrez 9º Grado',gl:'Xadrez 9º Grao',en:'Chess 9th Grade'}, desc:{es:'Karpov vs Korchnoi, geopolítica del ajedrez, la guerra fría en el tablero.',gl:'Karpov vs Korchnoi, xeopolítica do xadrez.',en:'Karpov vs Korchnoi, chess geopolitics, Cold War.'}, price:'30,00 €', level:{es:'Profesional',gl:'Profesional',en:'Professional'}, levelClass:'professional', rating:'5.0', amazon:'https://amzn.to/2O5Po5L', kindle:'https://amzn.to/39rduzu', emoji:'📕' },
+  { id:10, cat:'grandmaster', title:{es:'Ajedrez 10º Grado',gl:'Xadrez 10º Grao',en:'Chess 10th Grade'}, desc:{es:'Años 80, las "2Ks", tesis sobre talento vs método. El libro que cierra el círculo.',gl:'Anos 80, as "2Ks", tese talento vs método.',en:'The 80s, the "2Ks", talent vs method thesis.'}, price:'30,00 €', level:{es:'Profesional',gl:'Profesional',en:'Professional'}, levelClass:'professional', rating:'5.0', amazon:'https://amzn.to/3wemqBM', kindle:'https://amzn.to/3fv94eD', emoji:'📕' },
+  { id:11, cat:'projects', title:{es:'Salvemos al Rey Blanco',gl:'Salvemos ao Rei Branco',en:'Save the White King'}, desc:{es:'Aventura infantil para aprender ajedrez. Los niños ayudan a la Dama Blanca a rescatar al Rey.',gl:'Aventura infantil para aprender xadrez.',en:'Children\'s adventure to learn chess.'}, price:'10,99 €', level:{es:'Principiante',gl:'Principiante',en:'Beginner'}, levelClass:'beginner', rating:'5.0', amazon:'https://amzn.to/2Q8CvJk', kindle:'https://amzn.to/33vt9ua', emoji:'👑' },
+  { id:12, cat:'projects', title:{es:'Ajedrez Educativo',gl:'Xadrez Educativo',en:'Educational Chess'}, desc:{es:'Pedagogía digital y sinergias educativas. Inmersión en el ajedrez en la educación.',gl:'Pedagoxía dixital e sinerxías educativas.',en:'Digital pedagogy and educational synergies.'}, price:'40,00 €', level:{es:'Avanzado',gl:'Avanzado',en:'Advanced'}, levelClass:'advanced', rating:'5.0', amazon:'https://amzn.to/44jM6Ns', kindle:'https://amzn.to/3ss4Vk0', emoji:'📚' },
+  { id:13, cat:'projects', title:{es:'CiberAjedrez',gl:'CiberXadrez',en:'CyberChess'}, desc:{es:'IA + Ajedrez. Motores +3600 Elo. Análisis técnico avanzado del nuevo ciberajedrez.',gl:'IA + Xadrez. Motores +3600 Elo.',en:'AI + Chess. +3600 Elo engines. Advanced technical analysis.'}, price:'40,00 €', level:{es:'Profesional',gl:'Profesional',en:'Professional'}, levelClass:'professional', rating:'5.0', amazon:'https://amzn.to/45ihsp1', kindle:'https://amzn.to/3E4VoC8', emoji:'🤖' },
+];
+
+// ===== I18N =====
+const i18n = {
+  es: {
+    'nav.home':'Inicio','nav.catalog':'Catálogo','nav.educational':'Proyecto Educativo','nav.cyberchess':'CiberAjedrez','nav.author':'Autor','nav.contact':'Contacto',
+    'header.login':'Entrar',
+    'hero.badge':'Fundada en 2003 · Editorial Internacional',
+    'hero.title1':'Donde el Ajedrez','hero.title2':'se Convierte en Ciencia',
+    'hero.subtitle':'Más de 20 años formando campeones desde la escuela hasta la maestría. Descubre la colección más completa de ajedrez educativo en español.',
+    'hero.cta1':'Explorar Catálogo','hero.cta2':'Conocer Agente IA',
+    'stat.books':'Libros publicados','stat.years':'Años de experiencia','stat.students':'Estudiantes formados','stat.elo':'Elo en motores IA',
+    'catalog.label':'📖 Catálogo','catalog.title':'Nuestra Colección','catalog.subtitle':'Desde principiantes hasta Gran Maestría. Cada libro es un nivel en tu progresión ajedrecística.',
+    'filter.all':'Todos','filter.school':'Ciclo Escolar','filter.mastery':'Maestría','filter.grandmaster':'Gran Maestría','filter.projects':'Proyectos',
+    'edu.label':'🎓 Proyecto Educativo','edu.title':'Ajedrez en la Escuela','edu.subtitle':'Un método progresivo de 10 volúmenes diseñado para llevar el ajedrez a las aulas.',
+    'edu.cycle1':'Ciclo Escolar','edu.cycle1desc':'Grados 1-3 · De 0 a 1800 Elo. Reglas básicas, táctica, primeros maestros.',
+    'edu.cycle2':'Ciclo Maestría','edu.cycle2desc':'Grados 4-7 · De 1800 a 2200 FIDE. Aperturas, análisis profundo.',
+    'edu.cycle3':'Ciclo Gran Maestría','edu.cycle3desc':'Grados 8-10 · Épocas doradas, geopolítica, talento vs método.',
+    'edu.method':'Metodología propia','edu.methoddesc':'Pedagogía digital, sinergias educativas y aprendizaje progresivo.',
+    'cyber.label':'🤖 CiberAjedrez','cyber.title':'IA + Ajedrez: El Futuro es Ahora','cyber.subtitle':'Motores de +3600 Elo, análisis técnico avanzado y la fusión del hombre con la máquina.',
+    'cyber.card1':'Análisis con IA','cyber.card1desc':'Motores de última generación que superan los 3600 puntos Elo.',
+    'cyber.card2':'Nuevos Paradigmas','cyber.card2desc':'¿Qué pasa con el desarrollo? ¿El enroque? La IA replantea conceptos clásicos.',
+    'cyber.card3':'CHESS ORGANIZERS PRO','cyber.card3desc':'Gestión profesional de eventos de ajedrez con tecnología de vanguardia.',
+    'author.label':'✍️ Autor','author.name':'Roberto Páramos Domínguez','author.title':'Maestro Internacional de Ajedrez · Fundador de JREDITION',
+    'author.bio':'Maestro Internacional desde 1997, con más de 30 años de experiencia profesional. Ha formado a más de 3.000 estudiantes, incluyendo 50+ jugadores con rating superior a 2200 FIDE.',
+    'author.stat1':'MI Title','author.stat2':'Libros','author.stat3':'Estudiantes','author.stat4':'Fundación',
+    'footer.desc':'Editorial internacional especializada en ajedrez y ajedrez educativo. Desde 2003 formando campeones.',
+    'footer.nav':'Navegación','footer.catalog':'Catálogo','footer.educational':'Proyecto Educativo','footer.author':'Autor',
+    'footer.products':'Productos','footer.contact':'Contacto','footer.rights':'Todos los derechos reservados','footer.made':'Hecho con ♟️ para el ajedrez mundial',
+    'chat.name':'JR Assistant','chat.status':'Agente IA · Online',
+    'chat.welcome':'¡Hola! Soy el asistente IA de JREDITION. Puedo ayudarte a encontrar el libro perfecto, responder preguntas sobre ajedrez o explicarte nuestro proyecto educativo. ¿En qué puedo ayudarte?',
+    'chat.q1':'📚 Recomiéndame un libro','chat.q2':'🎯 ¿Qué grado para 8 años?','chat.q3':'🤖 ¿Qué es CiberAjedrez?','chat.q4':'⭐ Mis puntos',
+    'modal.buy':'Comprar en Amazon',
+    'gamification.title':'🏅 Tu Progreso','gamification.points':'Puntos JREDITION','gamification.level':'Nivel 2 · Aprendiz','gamification.toNext':'para siguiente nivel','gamification.badges':'Insignias',
+    'badge.reader':'Lector','badge.collector':'Coleccionista','badge.master':'Maestro','badge.gm':'Gran Maestro',
+    'chat.thinking':'Analizando...',
+    'toast.points':'¡Has ganado +10 puntos por explorar!',
+    'product.details':'Ver Detalles',
+    'product.sold_by':'Vendido por Amazon',
+    'product.amazon':'Comprar en Amazon',
+    'product.kindle':'Comprar Kindle',
+  },
+  gl: {
+    'nav.home':'Inicio','nav.catalog':'Catálogo','nav.educational':'Proxecto Educativo','nav.cyberchess':'CiberXadrez','nav.author':'Autor','nav.contact':'Contacto',
+    'header.login':'Entrar',
+    'hero.badge':'Fundada en 2003 · Editorial Internacional',
+    'hero.title1':'Onde o Xadrez','hero.title2':'se Converte en Ciencia',
+    'hero.subtitle':'Máis de 20 anos formando campións dende a escola ata a maestría. Descubre a colección máis completa de xadrez educativo en galego.',
+    'hero.cta1':'Explorar Catálogo','hero.cta2':'Coñecer Axente IA',
+    'stat.books':'Libros publicados','stat.years':'Anos de experiencia','stat.students':'Estudantes formados','stat.elo':'Elo en motores IA',
+    'catalog.label':'📖 Catálogo','catalog.title':'A Nosa Colección','catalog.subtitle':'Dende principiantes ata Gran Maestría.',
+    'filter.all':'Todos','filter.school':'Ciclo Escolar','filter.mastery':'Maestría','filter.grandmaster':'Gran Maestría','filter.projects':'Proxectos',
+    'edu.label':'🎓 Proxecto Educativo','edu.title':'Xadrez na Escola','edu.subtitle':'Un método progresivo de 10 volumes.',
+    'edu.cycle1':'Ciclo Escolar','edu.cycle1desc':'Graos 1-3 · De 0 a 1800 Elo. Regras básicas.',
+    'edu.cycle2':'Ciclo Maestría','edu.cycle2desc':'Graos 4-7 · De 1800 a 2200 FIDE.',
+    'edu.cycle3':'Ciclo Gran Maestría','edu.cycle3desc':'Graos 8-10 · Épocas douradas, xeopolítica.',
+    'edu.method':'Metodoloxía propia','edu.methoddesc':'Pedagoxía dixital, sinerxías educativas.',
+    'cyber.label':'🤖 CiberXadrez','cyber.title':'IA + Xadrez: O Futuro é Agora','cyber.subtitle':'Motores de +3600 Elo, análise técnica avanzada.',
+    'cyber.card1':'Análise con IA','cyber.card1desc':'Motores de última xeración que superan os 3600 Elo.',
+    'cyber.card2':'Novos Paradigmas','cyber.card2desc':'Desenvolvemento, enroque, peóns dobrados. A IA replantexa conceptos.',
+    'cyber.card3':'CHESS ORGANIZERS PRO','cyber.card3desc':'Xestión profesional de eventos de xadrez.',
+    'author.label':'✍️ Autor','author.name':'Roberto Páramos Domínguez','author.title':'Mestre Internacional de Xadrez · Fundador de JREDITION',
+    'author.bio':'Mestre Internacional dende 1997, con máis de 30 anos de experiencia. Formou a máis de 3.000 estudantes.',
+    'author.stat1':'Título MI','author.stat2':'Libros','author.stat3':'Estudantes','author.stat4':'Fundación',
+    'footer.desc':'Editorial internacional especializada en xadrez e xadrez educativo.',
+    'footer.nav':'Navegación','footer.catalog':'Catálogo','footer.educational':'Proxecto Educativo','footer.author':'Autor',
+    'footer.products':'Produtos','footer.contact':'Contacto','footer.rights':'Tódolos dereitos reservados','footer.made':'Feito con ♟️ para o xadrez mundial',
+    'chat.name':'JR Assistant','chat.status':'Axente IA · Online',
+    'chat.welcome':'Ola! Son o asistente IA de JREDITION. Podo axudarche a atopar o libro perfecto. En que podo axudarche?',
+    'chat.q1':'📚 Recoméndame un libro','chat.q2':'🎯 Que grao para 8 anos?','chat.q3':'🤖 Que é CiberXadrez?','chat.q4':'⭐ Os meus puntos',
+    'modal.buy':'Comprar en Amazon',
+    'gamification.title':'🏅 O Teu Progreso','gamification.points':'Puntos JREDITION','gamification.level':'Nivel 2 · Aprendiz','gamification.toNext':'para seguinte nivel','gamification.badges':'Insignias',
+    'badge.reader':'Lector','badge.collector':'Coleccionista','badge.master':'Mestre','badge.gm':'Gran Mestre',
+    'chat.thinking':'Analizando...',
+    'toast.points':'¡Gañaches +10 puntos por explorar!',
+    'product.details':'Ver Detalles',
+    'product.sold_by':'Vendido por Amazon',
+    'product.amazon':'Comprar en Amazon',
+    'product.kindle':'Comprar Kindle',
+  },
+  en: {
+    'nav.home':'Home','nav.catalog':'Catalog','nav.educational':'Educational Project','nav.cyberchess':'CyberChess','nav.author':'Author','nav.contact':'Contact',
+    'header.login':'Login',
+    'hero.badge':'Founded in 2003 · International Publisher',
+    'hero.title1':'Where Chess','hero.title2':'Becomes Science',
+    'hero.subtitle':'Over 20 years forming champions from school to mastery. Discover the most complete collection of educational chess.',
+    'hero.cta1':'Explore Catalog','hero.cta2':'Meet AI Agent',
+    'stat.books':'Books published','stat.years':'Years of experience','stat.students':'Students trained','stat.elo':'Elo in AI engines',
+    'catalog.label':'📖 Catalog','catalog.title':'Our Collection','catalog.subtitle':'From beginners to Grandmaster level. Each book is a step in your chess progression.',
+    'filter.all':'All','filter.school':'School Cycle','filter.mastery':'Mastery','filter.grandmaster':'Grandmaster','filter.projects':'Projects',
+    'edu.label':'🎓 Educational Project','edu.title':'Chess at School','edu.subtitle':'A progressive 10-volume method designed to bring chess to classrooms.',
+    'edu.cycle1':'School Cycle','edu.cycle1desc':'Grades 1-3 · From 0 to 1800 Elo. Basic rules, tactics.',
+    'edu.cycle2':'Mastery Cycle','edu.cycle2desc':'Grades 4-7 · From 1800 to 2200 FIDE. Openings, deep analysis.',
+    'edu.cycle3':'Grandmaster Cycle','edu.cycle3desc':'Grades 8-10 · Golden eras, geopolitics, talent vs method.',
+    'edu.method':'Own methodology','edu.methoddesc':'Digital pedagogy, educational synergies, progressive learning.',
+    'cyber.label':'🤖 CyberChess','cyber.title':'AI + Chess: The Future is Now','cyber.subtitle':'+3600 Elo engines, advanced technical analysis, human-machine fusion.',
+    'cyber.card1':'AI Analysis','cyber.card1desc':'Next-gen engines surpassing 3600 Elo. Understand how they evaluate positions.',
+    'cyber.card2':'New Paradigms','cyber.card2desc':'Development, castling, doubled pawns. AI rethinks classical concepts.',
+    'cyber.card3':'CHESS ORGANIZERS PRO','cyber.card3desc':'Professional chess event management with cutting-edge technology.',
+    'author.label':'✍️ Author','author.name':'Roberto Páramos Domínguez','author.title':'International Master · Founder of JREDITION',
+    'author.bio':'International Master since 1997, with over 30 years of professional experience. Trained over 3,000 students, including 50+ players rated above 2200 FIDE.',
+    'author.stat1':'IM Title','author.stat2':'Books','author.stat3':'Students','author.stat4':'Founded',
+    'footer.desc':'International publisher specialized in chess and educational chess. Since 2003 forming champions.',
+    'footer.nav':'Navigation','footer.catalog':'Catalog','footer.educational':'Educational Project','footer.author':'Author',
+    'footer.products':'Products','footer.contact':'Contact','footer.rights':'All rights reserved','footer.made':'Made with ♟️ for world chess',
+    'chat.name':'JR Assistant','chat.status':'AI Agent · Online',
+    'chat.welcome':'Hello! I am JREDITION\'s AI assistant. I can help you find the perfect book, answer chess questions, or explain our educational project. How can I help you?',
+    'chat.q1':'📚 Recommend a book','chat.q2':'🎯 Which grade for age 8?','chat.q3':'🤖 What is CyberChess?','chat.q4':'⭐ My points',
+    'modal.buy':'Buy on Amazon',
+    'gamification.title':'🏅 Your Progress','gamification.points':'JREDITION Points','gamification.level':'Level 2 · Apprentice','gamification.toNext':'to next level','gamification.badges':'Badges',
+    'badge.reader':'Reader','badge.collector':'Collector','badge.master':'Master','badge.gm':'Grandmaster',
+    'chat.thinking':'Analyzing...',
+    'toast.points':'You earned +10 points for exploring!',
+    'product.details':'View Details',
+    'product.sold_by':'Sold by Amazon',
+    'product.amazon':'Buy on Amazon',
+    'product.kindle':'Buy Kindle',
+  }
+};
+
+let currentLang = 'es';
+let currentFilter = 'all';
+let points = 150;
+let chatOpen = false;
+
+function t(key) { return i18n[currentLang][key] || key; }
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  document.documentElement.lang = currentLang;
+  renderProducts();
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  applyTranslations();
+}
+
+// ===== PRODUCT RENDERING =====
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  const filtered = currentFilter === 'all' ? products : products.filter(p => p.cat === currentFilter);
+  grid.innerHTML = filtered.map(p => {
+    const levelKey = 'level.' + p.levelClass;
+    return `
+    <div class="product-card" onclick="openModal(${p.id})">
+      <div class="product-card-image" style="background:linear-gradient(135deg,${p.cat==='school'?'#1a2a1a,#2a3a2a':p.cat==='mastery'?'#1a1a2a,#2a2a3a':p.cat==='grandmaster'?'#2a1a1a,#3a2a2a':'#1a2a2a,#2a3a3a'});">
+        <span style="font-size:5rem;opacity:0.3;">${p.emoji}</span>
+        <span class="level-badge level-${p.levelClass}">${p.level[currentLang]}</span>
+      </div>
+      <div class="product-card-body">
+        <h3>${p.title[currentLang]}</h3>
+        <div class="desc">${p.desc[currentLang]}</div>
+      </div>
+      <div class="product-card-footer">
+        <span class="product-price">${p.price}</span>
+        <span class="product-rating">★ ${p.rating}</span>
+        <span class="buy-btn" onclick="event.stopPropagation();window.open('${p.amazon}','_blank')">${t('product.details')}</span>
+      </div>
+    </div>`;}).join('');
+}
+
+// ===== FILTERS =====
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    currentFilter = this.dataset.filter;
+    renderProducts();
+  });
+});
+
+// ===== MODAL =====
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modalTitle').textContent = p.title[currentLang];
+  document.getElementById('modalLevel').textContent = p.level[currentLang];
+  document.getElementById('modalPrice').textContent = p.price;
+  document.getElementById('modalDesc').textContent = p.desc[currentLang];
+  document.getElementById('modalBuy').href = p.amazon;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== CHAT =====
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+  document.getElementById('chatToggle').style.display = chatOpen ? 'none' : 'flex';
+  if (chatOpen) document.getElementById('chatInput').focus();
+}
+function openChat() {
+  const panel = document.getElementById('chatPanel');
+  panel.classList.add('open');
+  chatOpen = true;
+  document.getElementById('chatToggle').style.display = 'none';
+  document.getElementById('chatInput').focus();
+  document.getElementById('chatWidget').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ===== AI KNOWLEDGE BASE =====
+const knowledgeBase = {
+  beginner: [
+    { pattern: /8\s*años|niño|niña|infantil|peque/i, response: (lang) => {
+      if(lang==='gl') return '📚 Para un neno de 8 anos, recomendo "Ajedrez 1er Grado" (principiantes) ou "Salvemos ao Rei Branco" se quere unha aventura divertida. O 1er Grado ten 208 páxinas con regras básicas e primeiros conceptos. 🛒 https://amzn.to/3u2HTvR';
+      if(lang==='en') return '📚 For an 8-year-old, I recommend "Chess 1st Grade" (beginners) or "Save the White King" for a fun adventure story. The 1st Grade has 208 pages with basic rules and first concepts. 🛒 https://amzn.to/3u2HTvR';
+      return '📚 Para un niño de 8 años, recomiendo "Ajedrez 1er Grado" (principiantes) o "Salvemos al Rey Blanco" si prefiere una aventura divertida. El 1er Grado tiene 208 páginas con reglas básicas y primeros conceptos. 🛒 https://amzn.to/3u2HTvR';
+    }},
+  ],
+  catalog: [
+    { pattern: /diferencia|difference|diferenza.*(grado|grade|grao)/i, response: (lang) => {
+      if(lang==='gl') return '📖 O Grado 3 (escolar) chega ata ~1800 Elo con conceptos tácticos. O Grado 4 (maestría) esixe máis, con aperturas e análise profunda. Son ciclos diferentes: escolar vs maestría. O salto esixe dedicación.';
+      if(lang==='en') return '📖 Grade 3 (school cycle) reaches ~1800 Elo with tactical concepts. Grade 4 (mastery) demands more, with openings and deep analysis. They are different cycles: school vs mastery. The jump requires dedication.';
+      return '📖 El Grado 3 (escolar) llega hasta ~1800 Elo con conceptos tácticos. El Grado 4 (maestría) exige más, con aperturas y análisis profundo. Son ciclos diferentes: escolar vs maestría. El salto requiere dedicación.';
+    }},
+    { pattern: /profesor|teacher|profesor|material.*docente/i, response: (lang) => {
+      if(lang==='gl') return '👨‍🏫 Para profesores, recomendo "Ajedrez Educativo" (pedagoxía dixital, 40€) e toda a serie "Ajedrez na Escola" (10 volumes). Tamén temos o "Proxecto Educativo" con metodoloxía propia. Máis info nos nosos libros!';
+      if(lang==='en') return '👨‍🏫 For teachers, I recommend "Educational Chess" (digital pedagogy, €40) and the complete "Chess at School" series (10 volumes). We also have the Educational Project with our own methodology. More info in our books!';
+      return '👨‍🏫 Para profesores, recomiendo "Ajedrez Educativo" (pedagogía digital, 40€) y toda la serie "Ajedrez en la Escuela" (10 volúmenes). También tenemos el "Proyecto Educativo" con metodología propia. ¡Más info en nuestros libros!';
+    }},
+  ],
+  cyber: [
+    { pattern: /ciberajedrez|ciberxadrez|cyberchess|ciber/i, response: (lang) => {
+      if(lang==='gl') return '🤖 O CiberXadrez é a fusión do home coa máquina. Usamos motores de +3600 Elo para analizar partidas e descubrir novos paradigmas. O libro "CiberXadrez" (40€) mergúllase en IA, desenvolvemento, enroque, peóns dobrados... ¡Unha revolución!';
+      if(lang==='en') return '🤖 CyberChess is the fusion of man and machine. We use +3600 Elo engines to analyze games and discover new paradigms. The book "CyberChess" (€40) dives into AI, development, castling, doubled pawns... A revolution!';
+      return '🤖 El CiberAjedrez es la fusión del hombre con la máquina. Usamos motores de +3600 Elo para analizar partidas y descubrir nuevos paradigmas. El libro "CiberAjedrez" (40€) se sumerge en IA, desarrollo, enroque, peones doblados... ¡Una revolución!';
+    }},
+  ],
+  general: [
+    { pattern: /recomienda|recomend|recommend|sugiere|suggest|que.*libro|which.*book/i, response: (lang) => {
+      if(lang==='gl') return '📚 Depende do teu nivel! \n• Principiante: "Ajedrez 1er Grado" (25€) ou "Salvemos ao Rei Branco" (10,99€)\n• Intermedio: "Ajedrez 3er Grado" (25€) ou "Ajedrez 5º Grado" (27€)\n• Avanzado: "Ajedrez 6º Grado" (30€)\n• Profesional: "CiberXadrez" (40€) \n\nDime o teu nivel e recoméndoche o perfecto! 🎯';
+      if(lang==='en') return '📚 It depends on your level!\n• Beginner: "Chess 1st Grade" (€25) or "Save the White King" (€10.99)\n• Intermediate: "Chess 3rd Grade" (€25) or "Chess 5th Grade" (€27)\n• Advanced: "Chess 6th Grade" (€30)\n• Professional: "CyberChess" (€40)\n\nTell me your level and I\'ll recommend the perfect one! 🎯';
+      return '📚 Depende de tu nivel!\n• Principiante: "Ajedrez 1er Grado" (25€) o "Salvemos al Rey Blanco" (10,99€)\n• Intermedio: "Ajedrez 3er Grado" (25€) o "Ajedrez 5º Grado" (27€)\n• Avanzado: "Ajedrez 6º Grado" (30€)\n• Profesional: "CiberAjedrez" (40€)\n\n¡Dime tu nivel y te recomiendo el perfecto! 🎯';
+    }},
+    { pattern: /punto|point|score|puntos|pts/i, response: (lang) => {
+      if(lang==='gl') return `⭐ Tes ${points} puntos JREDITION! Gaña máis puntos: \n• Explora o catálogo (+10) \n• Fala co asistente (+5 cada conversa) \n• Comparte JREDITION (+20) \n• Alcanza 500 pts para desbloquear a insignia "Mestre"!`;
+      if(lang==='en') return `⭐ You have ${points} JREDITION points! Earn more:\n• Browse the catalog (+10)\n• Talk with the assistant (+5 per conversation)\n• Share JREDITION (+20)\n• Reach 500 pts to unlock the "Master" badge!`;
+      return `⭐ ¡Tienes ${points} puntos JREDITION! Gana más puntos:\n• Explora el catálogo (+10)\n• Habla con el asistente (+5 cada conversación)\n• Comparte JREDITION (+20)\n¡Alcanza 500 pts para desbloquear la insignia "Maestro"!`;
+    }},
+    { pattern: /precio|price|prezo|costo|cost/i, response: (lang) => {
+      if(lang==='gl') return '💰 Os nosos prezos: \n• Ciclo Escolar (Grados 1-3): 25€ cada un\n• Maestría (Grados 4-5): 27€ · (Grados 6-7): 30€\n• Gran Maestría (Grados 8-10): 30€\n• Salvemos ao Rei Branco: 10,99€\n• Ajedrez Educativo: 40€\n• CiberXadrez: 40€\nTodos dispoñibles en Amazon! 🛒';
+      if(lang==='en') return '💰 Our prices:\n• School Cycle (Grades 1-3): €25 each\n• Mastery (Grades 4-5): €27 · (Grades 6-7): €30\n• Grandmaster (Grades 8-10): €30\n• Save the White King: €10.99\n• Educational Chess: €40\n• CyberChess: €40\nAll available on Amazon! 🛒';
+      return '💰 Nuestros precios:\n• Ciclo Escolar (Grados 1-3): 25€ cada uno\n• Maestría (Grados 4-5): 27€ · (Grados 6-7): 30€\n• Gran Maestría (Grados 8-10): 30€\n• Salvemos al Rey Blanco: 10,99€\n• Ajedrez Educativo: 40€\n• CiberAjedrez: 40€\n¡Todos disponibles en Amazon! 🛒';
+    }},
+    { pattern: /roberto|páramos|paramos|author|autor/i, response: (lang) => {
+      if(lang==='gl') return '✍️ Roberto Páramos Domínguez é MI dende 1997. 30+ anos de experiencia, 3000+ estudantes, 50+ xogadores >2200 FIDE. Fundou JREDITION en 2003. A súa filosofía: "O xadrez, como a vida, é 90% estratexia".';
+      if(lang==='en') return '✍️ Roberto Páramos Domínguez is an IM since 1997. 30+ years experience, 3000+ students, 50+ players >2200 FIDE. He founded JREDITION in 2003. His philosophy: "Chess, like life, is 90% strategy."';
+      return '✍️ Roberto Páramos Domínguez es MI desde 1997. 30+ años de experiencia, 3000+ estudiantes, 50+ jugadores >2200 FIDE. Fundó JREDITION en 2003. Su filosofía: "El ajedrez, como la vida, es 90% estrategia".';
+    }},
+    { pattern: /contacto|contact|email/i, response: (lang) => {
+      return '📬 Contáctanos: xg@xadrezgalego.net · +34 986 260 259 · C/Reiseñor, 15, 36205 Vigo. Web: xadrezgalego.net';
+    }},
+    { pattern: /hola|ola|hello|hi|buenas|saludos/i, response: (lang) => {
+      if(lang==='gl') return '👋 Ola! Encantado de saudarte. Son JR Assistant, o teu guía no mundo JREDITION. Pregúntame o que queiras sobre os nosos libros, o proxecto educativo ou o CiberXadrez!';
+      if(lang==='en') return '👋 Hello! Nice to meet you. I\'m JR Assistant, your guide to the JREDITION world. Ask me anything about our books, educational project, or CyberChess!';
+      return '👋 ¡Hola! Encantado de saludarte. Soy JR Assistant, tu guía en el mundo JREDITION. ¡Pregúntame lo que quieras sobre nuestros libros, el proyecto educativo o el CiberAjedrez!';
+    }},
+  ]
+};
+
+function getBotResponse(input, lang) {
+  input = input.toLowerCase();
+  for (const category of Object.values(knowledgeBase)) {
+    for (const item of category) {
+      if (item.pattern.test(input)) return item.response(lang);
+    }
+  }
+  if(lang==='gl') return '🤔 Non atopei información específica sobre iso. Pregúntame sobre: \n• Recomendacións de libros \n• Prezos e catálogo \n• O CiberXadrez \n• O proxecto educativo \n• Roberto Páramos \n• Os teus puntos de gamificación';
+  if(lang==='en') return '🤔 I couldn\'t find specific information about that. Ask me about:\n• Book recommendations\n• Prices and catalog\n• CyberChess\n• The educational project\n• Roberto Páramos\n• Your gamification points';
+  return '🤔 No encontré información específica sobre eso. Pregúntame sobre:\n• Recomendaciones de libros\n• Precios y catálogo\n• El CiberAjedrez\n• El proyecto educativo\n• Roberto Páramos\n• Tus puntos de gamificación';
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addMessage(text, 'user');
+  document.getElementById('sendBtn').disabled = true;
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'chat-typing';
+  typingDiv.innerHTML = '<span></span><span></span><span></span>';
+  typingDiv.id = 'typingIndicator';
+  document.getElementById('chatMessages').appendChild(typingDiv);
+  document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+
+  setTimeout(() => {
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+    const response = getBotResponse(text, currentLang);
+    addMessage(response, 'bot');
+    document.getElementById('sendBtn').disabled = false;
+    addPoints(5);
+  }, 1000 + Math.random() * 1000);
+}
+
+function addMessage(text, type) {
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `message ${type}`;
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  div.innerHTML = text.replace(/\n/g, '<br>') + `<div class="msg-time">${time}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendQuickReply(index) {
+  const qs = ['📚 Recomiéndame un libro', '🎯 ¿Qué grado para 8 años?', '🤖 ¿Qué es CiberAjedrez?', '⭐ Mis puntos'];
+  const agents = { es: qs, gl: ['📚 Recoméndame un libro', '🎯 Que grao para 8 anos?', '🤖 Que é CiberXadrez?', '⭐ Os meus puntos'], en: ['📚 Recommend a book', '🎯 Which grade for age 8?', '🤖 What is CyberChess?', '⭐ My points'] };
+  const msgs = agents[currentLang] || qs;
+  if (msgs[index]) {
+    if (!chatOpen) openChat();
+    document.getElementById('chatInput').value = msgs[index];
+    sendMessage();
+  }
+}
+
+// ===== GAMIFICATION =====
+function addPoints(amount) {
+  points += amount;
+  document.getElementById('pointsDisplay').textContent = points;
+  if (amount > 0) showToast(`+${amount} pts`);
+}
+
+function showToast(msg) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<span class="icon">⭐</span> ${msg}`;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+function toggleGamification() {
+  document.getElementById('gamiPoints').textContent = points;
+  document.getElementById('gamificationOverlay').classList.toggle('open');
+}
+function closeGamification() {
+  document.getElementById('gamificationOverlay').classList.remove('open');
+}
+
+// ===== MENU =====
+function toggleMenu() {
+  document.getElementById('nav').classList.toggle('open');
+}
+
+// ===== SCROLL EFFECT =====
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ===== INIT =====
+applyTranslations();
+setTimeout(() => addPoints(10), 2000);
+</script>
+</body>
+</html>
