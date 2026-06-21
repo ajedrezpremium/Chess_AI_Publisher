@@ -72,7 +72,7 @@ CREATE POLICY "Users can update own profile" ON profiles
 -- Gamification: user can read own
 CREATE POLICY "Users can read own gamification" ON gamification
   FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can update own gamification" ON gamification
+CREATE POLICY "Users can insert own gamification" ON gamification
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can update own gamification" ON gamification
   FOR UPDATE USING (auth.uid() = user_id);
