@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { t, type Lang } from '@/lib/i18n';
-import { getBotResponse } from '@/lib/knowledge-base';
 
 interface ChatWidgetProps {
   lang: Lang;
@@ -36,12 +35,19 @@ export default function ChatWidget({ lang, onPointsEarned }: ChatWidgetProps) {
     setMessages(prev => [...prev, { role: 'user', content: text }]);
     setLoading(true);
 
-    setTimeout(() => {
-      const response = getBotResponse(text, lang);
-      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-      setLoading(false);
-      onPointsEarned?.(5);
-    }, 800 + Math.random() * 800);
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, lang }),
+      });
+      const data = await res.json();
+      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
+      if (data.pointsAwarded) onPointsEarned?.(data.pointsAwarded);
+    } catch {
+      setMessages(prev => [...prev, { role: 'assistant', content: '⚠️ Error de conexión. Inténtalo de nuevo.' }]);
+    }
+    setLoading(false);
   };
 
   const quickReplies = [
