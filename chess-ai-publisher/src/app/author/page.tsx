@@ -9,7 +9,7 @@ import { products } from '@/lib/products';
 
 export default function AuthorPage() {
   const [lang, setLang] = useState<Lang>('es');
-  const mathBooks = products.filter(p => p.cat === 'math');
+  const isabelBooks = products.filter(p => p.cat === 'math' || p.id === 20);
 
   return (
     <>
@@ -54,13 +54,13 @@ export default function AuthorPage() {
             </div>
           </div>
 
-          {/* Ajedrez y Matemáticas books */}
-          <div className="section-label">📚 {lang === 'es' ? 'Colección' : lang === 'gl' ? 'Colección' : 'Collection'}</div>
+          {/* Obras de Isabel López Martínez */}
+          <div className="section-label">📚 {lang === 'es' ? 'Obras' : lang === 'gl' ? 'Obras' : 'Works'}</div>
           <h2 style={{ marginBottom: 32 }}>
-            {lang === 'es' ? 'Ajedrez y Matemáticas' : lang === 'gl' ? 'Xadrez e Matemáticas' : 'Chess and Math'}
+            {t('author.isabel.name', lang)}
           </h2>
           <div className="catalog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
-            {mathBooks.map(book => (
+            {isabelBooks.map(book => (
               <div key={book.id} className="product-card card">
                 <div className="product-emoji">{book.emoji}</div>
                 <h3 style={{ margin: '8px 0' }}>{book.title[lang]}</h3>
