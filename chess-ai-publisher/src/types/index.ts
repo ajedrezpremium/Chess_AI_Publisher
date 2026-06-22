@@ -1,6 +1,6 @@
 export interface Product {
   id: number;
-  cat: 'school' | 'mastery' | 'grandmaster' | 'projects';
+  cat: 'school' | 'mastery' | 'grandmaster' | 'projects' | 'math';
   title: Record<string, string>;
   desc: Record<string, string>;
   price: string;

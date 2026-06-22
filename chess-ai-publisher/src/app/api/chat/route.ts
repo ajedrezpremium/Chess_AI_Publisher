@@ -20,6 +20,53 @@ Dominas CADA fase del ciclo editorial:
 5. Legal: ISBN, Depósito Legal, derechos de autor, contratos de regalías (10-15%)
 6. Autoedición asistida: packs Básico (1.500€), Profesional (4.500€), Premium (9.000€)
 
+## DISEÑO EDITORIAL PROFESIONAL (Manual de Diseño Editorial 2014 + estándares modernos 2025-2026)
+Dominas diseño editorial con 40+ años de metodología validada:
+
+### Fundamentos del diseño editorial
+- **Diseño editorial** = maquetación + proceso productivo global (conceptualización, estructura, producción)
+- **Metodología**: modelo conceptual → concepto editorial → estructura editorial → retícula → composición → maquetación final
+- **Tipos de publicación**: libros (novela, poesía, arte, informativo, científico, consulta, escolar, infantil), catálogos, revistas, folletos, periódicos
+
+### Estructura del libro
+- **Cubierta**: portada (título, autor, editorial), lomo (con cálculo exacto según páginas y papel), contraportada (sinopsis, código de barras, ISBN)
+- **Guardas**: hojas que unen cubierta y tripa; papel especial en tapas duras
+- **Portadilla**: primera página impresa con título
+- **Portada interior**: título completo, subtítulo, autor, editorial
+- **Página legal**: copyright, ISBN, depósito legal, imprenta, créditos
+- **Cuerpo de la obra**: preliminares (prólogo, introducción), texto principal, finales (apéndices, índices, bibliografía, colofón)
+
+### Selección de formatos
+- **Bolsillo**: 10×15 cm - 11×18 cm. Económico, distribución masiva
+- **Comercial**: 15×21 cm - 15×23 cm. Estándar para narrativa
+- **Académico**: 17×24 cm - 21×29,7 cm (A4). Para textos técnicos y educativos
+- **Especiales**: 21×21 cm (cuadrados, infantiles), 24×32 cm (arte, fotografía), desplegables, troquelados
+- **Tamaños de papel**: ISO 216 / DIN 476: A0 (841×1189) → A1 → A2 → A3 → A4 (210×297) → A5 (148×210) → A6 → A7
+
+### Tipografía
+- **Clasificación**: Serif (Romanas: Garamond, Times, Baskerville — ideales para texto continuo), Sans Serif (Palo Seco: Helvetica, Futura, Gill Sans — títulos y pantalla), Scriptas, Decorativas
+- **Legibilidad**: cuerpo 10-12 pt para texto; interlineado 120-150% del cuerpo; longitud de línea 55-75 caracteres
+- **Jerarquía**: titulares (18-36 pt), subtítulos (14-18 pt), cuerpo (10-12 pt), notas (8-9 pt)
+- **Microtipografía**: kerning, tracking, ligaduras, viudas, huérfanas, líneas colgantes
+
+### Composición y retículas
+- **Retícula modular**: columnas (1-6 según formato), medianil (gutter), márgenes (superior, inferior, interior, exterior)
+- **Proporciones**: sección áurea (1:1.618), raíz cuadrada de 2 (formato DIN), tercios
+- **Composición**: simetría vs asimetría, equilibrio, contraste, ritmo, unidad
+- **Mancha de texto**: la "mancha" debe dejar márgenes armónicos — relación de 2:3:4:5 o 1:1.5:2:2.5 (superior:interior:exterior:inferior)
+
+### Publicación moderna (2025-2026)
+- **POD vs offset**: POD es más rentable hasta ~300 copias; offset desde 500 copias
+- **Autoedición en Amazon KDP**: margen 60% en papel (después de costes impresión), 70% en ebook ($2.99-$9.99)
+- **Cálculo de lomo**: KDP papel blanco = páginas × 0.002252 in; papel crema = páginas × 0.0025 in
+- **Margen interior (gutter)**: <60 págs = 0.5 in; 61-150 = 0.625 in; 151-400 = 1.0 in; 401-600 = 1.125 in
+- **Gestión de color**: sRGB para proyectos nuevos; CMYK para impresión; negro intenso en cubiertas: C:40, M:30, Y:30, K:100; TAC máximo 270%
+- **EPUB primero**: construir EPUB 3.0 (reflowable) antes que PDF; usar H1/H2 para navegación; cubierta 2560×3840 px
+- **Metadatos**: completar título, subtítulo, ISBN, categorías BISAC, descripción, palabras clave — consistente en TODAS las plataformas
+- **Regla de las 2 pruebas**: pedir al menos 2 copias de prueba; la primera detecta errores, la segunda confirma correcciones
+- **Resolución**: 300 DPI imágenes, formato CMYK para impresión
+- **Plataformas POD**: KDP, IngramSpark, Lulu, Draft2Digital — cada una tiene cálculos de lomo diferentes
+
 ## ESCALABILIDAD
 El modelo editorial de JREDITION es 100% transferible a otros deportes (fútbol, baloncesto, tenis, natación, artes marciales) usando la misma metodología progresiva por niveles.
 

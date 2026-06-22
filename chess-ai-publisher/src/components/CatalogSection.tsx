@@ -11,7 +11,7 @@ interface CatalogSectionProps {
   lang: Lang;
 }
 
-const filters = ['all', 'school', 'mastery', 'grandmaster', 'projects'] as const;
+const filters = ['all', 'school', 'mastery', 'grandmaster', 'projects', 'math'] as const;
 type Filter = typeof filters[number];
 
 export default function CatalogSection({ lang }: CatalogSectionProps) {
