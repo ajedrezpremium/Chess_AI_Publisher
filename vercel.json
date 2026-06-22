@@ -1,8 +1,4 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm install",
-  "rootDirectory": "chess-ai-publisher",
-  "regions": ["iad1"]
+  "rootDirectory": "chess-ai-publisher"
 }
