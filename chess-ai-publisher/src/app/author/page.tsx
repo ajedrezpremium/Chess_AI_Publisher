@@ -19,7 +19,7 @@ export default function AuthorPage() {
           {/* Roberto Páramos */}
           <div className="section-label">✍️ {t('author.label', lang)}</div>
           <div className="author-content" style={{ marginBottom: 80 }}>
-            <div className="author-image"><img src="/MANUAL EXCELLENCE CHESS ORGANIZERS 1.0 eng.jpg" alt="Chess Organizers" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} /></div>
+            <div className="author-image"><img src="/chess-organizers.jpg" alt="Chess Organizers" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} /></div>
             <div className="author-info">
               <h2>{t('author.name', lang)}</h2>
               <div className="author-title">{t('author.title', lang)}</div>
@@ -38,7 +38,7 @@ export default function AuthorPage() {
           {/* Isabel López Martínez */}
           <div className="section-label">✍️ Autora</div>
           <div className="author-content" style={{ marginBottom: 80 }}>
-            <div className="author-image"><img src="/cuento ajedrez.jpg" alt="Salvemos al Rey Blanco" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} /></div>
+            <div className="author-image"><img src="/cuento-ajedrez.jpg" alt="Salvemos al Rey Blanco" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} /></div>
             <div className="author-info">
               <h2>{t('author.isabel.name', lang)}</h2>
               <div className="author-title">{t('author.isabel.title', lang)}</div>
