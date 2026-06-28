@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { t, languages, type Lang } from '@/lib/i18n';
+import { useTheme } from '@/lib/useTheme';
 
 interface HeaderProps {
   lang: Lang;
@@ -13,6 +14,7 @@ interface HeaderProps {
 export default function Header({ lang, points, onLangChange, onGamificationOpen }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -41,6 +43,9 @@ export default function Header({ lang, points, onLangChange, onGamificationOpen 
           ))}
         </nav>
         <div className="header-right">
+          <button className="theme-btn" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
           {languages.map(l => (
             <button key={l.code} className={`lang-btn${l.code === lang ? ' active' : ''}`}
               onClick={() => onLangChange(l.code)}>{l.label}</button>
