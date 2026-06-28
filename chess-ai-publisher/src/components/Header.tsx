@@ -29,7 +29,7 @@ export default function Header({ lang, points, onLangChange, onGamificationOpen 
       <div className="header-inner">
         <a href="/" className="logo">
           <div className="logo-icon">♚</div>
-          <span>JREDITION</span>
+          <span>CHESS AI PUBLISHER</span>
         </a>
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label={t('header.menu', lang)}>
           <span /><span /><span />

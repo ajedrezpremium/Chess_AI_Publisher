@@ -9,7 +9,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'nav.author': { es: 'Autor', gl: 'Autor', en: 'Author' },
   'nav.contact': { es: 'Contacto', gl: 'Contacto', en: 'Contact' },
   'header.login': { es: 'Entrar', gl: 'Entrar', en: 'Login' },
-  'hero.badge': { es: 'CHESS AI PUBLISHER · Plataforma de Edición IA', gl: 'CHESS AI PUBLISHER · Plataforma de Edición IA', en: 'CHESS AI PUBLISHER · AI Publishing Platform' },
+  'hero.badge': { es: 'Plataforma de Edición IA', gl: 'Plataforma de Edición IA', en: 'AI Publishing Platform' },
   'hero.title1': { es: 'CHESS AI PUBLISHER', gl: 'CHESS AI PUBLISHER', en: 'CHESS AI PUBLISHER' },
   'hero.title2': { es: 'Donde el Ajedrez se Convierte en Ciencia', gl: 'Onde o Xadrez se Converte en Ciencia', en: 'Where Chess Becomes Science' },
   'hero.subtitle': { es: 'Plataforma inteligente de edición de ajedrez. Publica, gestiona y distribuye tus libros con tecnología IA.', gl: 'Plataforma intelixente de edición de xadrez. Publica, xestiona e distribúe os teus libros con tecnoloxía IA.', en: 'Smart chess publishing platform. Publish, manage, and distribute your books with AI technology.' },
