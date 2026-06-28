@@ -8,7 +8,6 @@ const cycles = [
   { icon: '📘', titleKey: 'edu.cycle1', descKey: 'edu.cycle1desc' },
   { icon: '📗', titleKey: 'edu.cycle2', descKey: 'edu.cycle2desc' },
   { icon: '📕', titleKey: 'edu.cycle3', descKey: 'edu.cycle3desc' },
-  { icon: '🏆', titleKey: 'edu.method', descKey: 'edu.methoddesc' },
 ];
 
 export default function EducationalSection({ lang }: EducationalSectionProps) {
