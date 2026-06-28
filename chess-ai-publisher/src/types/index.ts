@@ -10,6 +10,7 @@ export interface Product {
   amazon: string;
   kindle: string;
   emoji: string;
+  image?: string;
 }
 
 export interface ChatMessage {

@@ -15,12 +15,17 @@ export default function ProductCard({ product, lang, onOpenModal }: ProductCardP
     mastery: 'linear-gradient(135deg,#1a1a2a,#2a2a3a)',
     grandmaster: 'linear-gradient(135deg,#2a1a1a,#3a2a2a)',
     projects: 'linear-gradient(135deg,#1a2a2a,#2a3a3a)',
+    math: 'linear-gradient(135deg,#2a1a2a,#3a2a3a)',
   };
 
   return (
     <div className="product-card" onClick={() => onOpenModal(product)}>
       <div className="product-card-image" style={{ background: bgColors[product.cat] || bgColors.school }}>
-        <span style={{ fontSize: '5rem', opacity: 0.3 }}>{product.emoji}</span>
+        {product.image ? (
+          <img src={product.image} alt={product.title[lang]} className="product-cover" />
+        ) : (
+          <span style={{ fontSize: '5rem', opacity: 0.3 }}>{product.emoji}</span>
+        )}
         <span className={`level-badge level-${product.levelClass}`}>{product.level[lang]}</span>
       </div>
       <div className="product-card-body">

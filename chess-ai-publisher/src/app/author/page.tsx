@@ -62,14 +62,22 @@ export default function AuthorPage() {
           <div className="catalog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
             {isabelBooks.map(book => (
               <div key={book.id} className="product-card card">
-                <div className="product-emoji">{book.emoji}</div>
-                <h3 style={{ margin: '8px 0' }}>{book.title[lang]}</h3>
-                <p className="product-level" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{book.level[lang]}</p>
-                <p style={{ margin: '8px 0', lineHeight: 1.6 }}>{book.desc[lang]}</p>
-                <div style={{ fontWeight: 700, fontSize: 20, margin: '12px 0' }}>{book.price}</div>
-                <a href={book.amazon} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-block' }}>
-                  {lang === 'es' ? 'Comprar en Amazon' : lang === 'gl' ? 'Comprar en Amazon' : 'Buy on Amazon'} →
-                </a>
+                <div className="product-card-image">
+                  {book.image ? (
+                    <img src={book.image} alt={book.title[lang]} className="product-cover" />
+                  ) : (
+                    <div className="product-emoji" style={{ fontSize: '4rem', opacity: 0.3 }}>{book.emoji}</div>
+                  )}
+                </div>
+                <div style={{ padding: 20 }}>
+                  <h3 style={{ margin: '0 0 8px' }}>{book.title[lang]}</h3>
+                  <p className="product-level" style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{book.level[lang]}</p>
+                  <p style={{ margin: '8px 0', lineHeight: 1.6 }}>{book.desc[lang]}</p>
+                  <div style={{ fontWeight: 700, fontSize: 20, margin: '12px 0' }}>{book.price}</div>
+                  <a href={book.amazon} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-block' }}>
+                    {lang === 'es' ? 'Comprar en Amazon' : lang === 'gl' ? 'Comprar en Amazon' : 'Buy on Amazon'} →
+                  </a>
+                </div>
               </div>
             ))}
           </div>
