@@ -300,29 +300,29 @@ img { max-width: 100%; display: block; }
 
 /* ===== Footer ===== */
 .footer {
-  background: var(--bg-secondary); border-top: 1px solid var(--border-color);
+  background: #0a0a0f; border-top: 1px solid rgba(255,255,255,0.1);
   padding: 60px 0 40px;
 }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
 .footer-brand .logo { margin-bottom: 16px; }
-.footer-brand p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; max-width: 320px; }
-.footer-col h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px; }
+.footer-brand p { color: #ffffff; font-size: 0.85rem; line-height: 1.7; max-width: 320px; }
+.footer-col h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
 .footer-col a {
-  display: block; color: var(--text-secondary); font-size: 0.85rem;
+  display: block; color: #ffffff; font-size: 0.85rem;
   padding: 4px 0; transition: var(--transition);
 }
 .footer-col a:hover { color: var(--gold); }
 .footer-bottom {
-  margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color);
+  margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.8rem; color: var(--text-muted);
+  font-size: 0.8rem; color: #ffffff;
 }
 .social-links { display: flex; gap: 12px; margin-top: 12px; }
 .social-links a {
   width: 36px; height: 36px; border-radius: 50%;
-  background: var(--bg-card); border: 1px solid var(--border-color);
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
   display: flex; align-items: center; justify-content: center;
-  color: var(--text-secondary); transition: var(--transition); font-size: 0.85rem;
+  color: #ffffff; transition: var(--transition); font-size: 0.85rem;
   text-decoration: none;
 }
 .social-links a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
