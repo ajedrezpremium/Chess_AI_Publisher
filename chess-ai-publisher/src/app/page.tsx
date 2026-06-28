@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <>
       <Header lang={lang} points={points} onLangChange={setLang} onGamificationOpen={() => setGamiOpen(true)} />
-      <MainContent lang={lang} onOpenChat={() => {}} />
+      <MainContent lang={lang} />
       <Footer lang={lang} />
       <ChatWidget key={chatWidgetKey} lang={lang} onPointsEarned={addPoints} />
       <GamificationPanel lang={lang} points={points} open={gamiOpen} onClose={() => setGamiOpen(false)} />

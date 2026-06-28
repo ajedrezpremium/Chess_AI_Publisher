@@ -8,13 +8,12 @@ import AuthorSection from './AuthorSection';
 
 interface MainContentProps {
   lang: 'es' | 'gl' | 'en';
-  onOpenChat: () => void;
 }
 
-export default function MainContent({ lang, onOpenChat }: MainContentProps) {
+export default function MainContent({ lang }: MainContentProps) {
   return (
     <main>
-      <HeroSection lang={lang} onOpenChat={onOpenChat} />
+      <HeroSection lang={lang} />
       <CatalogSection lang={lang} />
       <EducationalSection lang={lang} />
       <CyberChessSection lang={lang} />
