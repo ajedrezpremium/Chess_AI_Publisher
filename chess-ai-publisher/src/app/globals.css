@@ -102,6 +102,13 @@ img { max-width: 100%; display: block; }
     radial-gradient(ellipse at 50% 80%, rgba(34,197,94,0.03) 0%, transparent 50%);
   z-index: 0;
 }
+.hero-image-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('/JRedition libros 2023.jpg');
+  background-size: cover; background-position: center;
+  filter: blur(8px) brightness(0.3);
+  opacity: 0.6;
+}
 .hero-grid {
   position: absolute; inset: 0; z-index: 0;
   background-image:
