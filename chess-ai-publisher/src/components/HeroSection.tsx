@@ -11,6 +11,7 @@ export default function HeroSection({ lang }: HeroSectionProps) {
     <section id="hero" className="hero">
       <div className="hero-bg" />
       <div className="hero-image-bg" />
+      <div className="hero-overlay" />
       <div className="hero-grid" />
       <div className="chess-piece" style={{ top: '15%', left: '8%', fontSize: '6rem' }}>♔</div>
       <div className="chess-piece" style={{ top: '60%', right: '10%', fontSize: '5rem', animationDuration: '25s' }}>♛</div>

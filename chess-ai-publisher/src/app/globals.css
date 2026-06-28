@@ -129,6 +129,13 @@ img { max-width: 100%; display: block; }
   filter: blur(2px);
   opacity: 0.9;
 }
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 0;
+  background: rgba(0,0,0,0.55);
+}
+[data-theme="light"] .hero-overlay {
+  background: rgba(0,0,0,0.35);
+}
 .hero-grid {
   position: absolute; inset: 0; z-index: 0;
   background-image:
@@ -148,18 +155,28 @@ img { max-width: 100%; display: block; }
 .hero-content { position: relative; z-index: 1; max-width: 800px; padding: 80px 0; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(212,168,67,0.15); border: 1px solid rgba(212,168,67,0.3);
-  padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; color: var(--gold);
-  margin-bottom: 24px; font-weight: 500;
+  background: rgba(0,0,0,0.4); border: 1px solid var(--gold);
+  padding: 8px 20px; border-radius: 100px; font-size: 0.8rem; color: var(--gold-light);
+  margin-bottom: 24px; font-weight: 600; backdrop-filter: blur(4px);
 }
 .hero h1 {
   font-family: 'Playfair Display', serif; font-weight: 900;
   font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 16px;
 }
-.hero h1 span { background: linear-gradient(135deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 span {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
 .hero p {
-  font-size: 1.125rem; color: var(--text-secondary); max-width: 600px;
+  font-size: 1.125rem; color: #f0ece4; max-width: 600px;
   margin-bottom: 40px; line-height: 1.8;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+[data-theme="light"] .hero p {
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
 .btn-primary {
