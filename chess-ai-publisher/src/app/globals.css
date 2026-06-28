@@ -104,7 +104,7 @@ img { max-width: 100%; display: block; }
 }
 .hero-image-bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('/JRedition libros 2023.jpg');
+  background-image: url('/jredition-libros-2023.jpg');
   background-size: cover; background-position: center;
   filter: blur(8px) brightness(0.3);
   opacity: 0.6;
