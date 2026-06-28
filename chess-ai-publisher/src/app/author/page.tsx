@@ -19,7 +19,20 @@ export default function AuthorPage() {
           {/* Roberto Páramos */}
           <div className="section-label">✍️ {t('author.label', lang)}</div>
           <div className="author-content" style={{ marginBottom: 80 }}>
-            <div className="author-image"><img src="/chess-organizers.jpg" alt="Chess Organizers" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} /></div>
+            <div className="author-image">
+              <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%', borderRadius: 12 }}>
+                <rect width="200" height="200" fill="#1a1a2e" rx="12" />
+                <circle cx="100" cy="75" r="35" fill="#e8d5b7" />
+                <circle cx="85" cy="68" r="4" fill="#333" />
+                <circle cx="115" cy="68" r="4" fill="#333" />
+                <path d="M88 82 Q100 92 112 82" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round" />
+                <rect x="75" y="115" width="50" height="55" rx="8" fill="#2c2c54" />
+                <rect x="72" y="118" width="8" height="35" rx="4" fill="#2c2c54" />
+                <rect x="120" y="118" width="8" height="35" rx="4" fill="#2c2c54" />
+                <rect x="78" y="168" width="44" height="6" rx="3" fill="#2c2c54" />
+                <text x="100" y="195" textAnchor="middle" fontSize="10" fill="#d4a843" fontWeight="bold">♚ IM</text>
+              </svg>
+            </div>
             <div className="author-info">
               <h2>{t('author.name', lang)}</h2>
               <div className="author-title">{t('author.title', lang)}</div>
@@ -38,7 +51,21 @@ export default function AuthorPage() {
           {/* Isabel López Martínez */}
           <div className="section-label">✍️ Autora</div>
           <div className="author-content" style={{ marginBottom: 80 }}>
-            <div className="author-image"><img src="/cuento-ajedrez.jpg" alt="Salvemos al Rey Blanco" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} /></div>
+            <div className="author-image">
+              <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%', borderRadius: 12 }}>
+                <rect width="200" height="200" fill="#2e1a2e" rx="12" />
+                <circle cx="100" cy="75" r="35" fill="#f0d5b7" />
+                <circle cx="85" cy="68" r="4" fill="#333" />
+                <circle cx="115" cy="68" r="4" fill="#333" />
+                <path d="M88 82 Q100 92 112 82" stroke="#333" strokeWidth="2" fill="none" strokeLinecap="round" />
+                <path d="M92 45 Q100 52 108 45" stroke="#333" strokeWidth="2" fill="none" />
+                <rect x="75" y="115" width="50" height="55" rx="8" fill="#4a2a4a" />
+                <rect x="72" y="118" width="8" height="35" rx="4" fill="#4a2a4a" />
+                <rect x="120" y="118" width="8" height="35" rx="4" fill="#4a2a4a" />
+                <rect x="78" y="168" width="44" height="6" rx="3" fill="#4a2a4a" />
+                <text x="100" y="195" textAnchor="middle" fontSize="10" fill="#d4a843" fontWeight="bold">♕ AUTORA</text>
+              </svg>
+            </div>
             <div className="author-info">
               <h2>{t('author.isabel.name', lang)}</h2>
               <div className="author-title">{t('author.isabel.title', lang)}</div>
