@@ -17,8 +17,14 @@ type Filter = typeof filters[number];
 export default function CatalogSection({ lang }: CatalogSectionProps) {
   const [activeFilter, setActiveFilter] = useState<Filter>('all');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [animKey, setAnimKey] = useState(0);
 
   const filtered = activeFilter === 'all' ? products : products.filter(p => p.cat === activeFilter);
+
+  const handleFilter = (f: Filter) => {
+    setActiveFilter(f);
+    setAnimKey(k => k + 1);
+  };
 
   return (
     <section id="catalog" className="section">
@@ -30,13 +36,13 @@ export default function CatalogSection({ lang }: CatalogSectionProps) {
         <div className="catalog-filters">
           {filters.map(f => (
             <button key={f} className={`filter-btn${activeFilter === f ? ' active' : ''}`}
-              onClick={() => setActiveFilter(f)}>
+              onClick={() => handleFilter(f)}>
               {t(`filter.${f}`, lang)}
             </button>
           ))}
         </div>
 
-        <div className="products-grid">
+        <div className="products-grid" key={animKey}>
           {filtered.map(p => (
             <ProductCard key={p.id} product={p} lang={lang} onOpenModal={setSelectedProduct} />
           ))}
