@@ -106,8 +106,8 @@ img { max-width: 100%; display: block; }
   position: absolute; inset: 0; z-index: 0;
   background-image: url('/jredition-libros-2023.jpg');
   background-size: cover; background-position: center;
-  filter: blur(8px) brightness(0.3);
-  opacity: 0.6;
+  filter: blur(4px) brightness(0.5);
+  opacity: 0.8;
 }
 .hero-grid {
   position: absolute; inset: 0; z-index: 0;

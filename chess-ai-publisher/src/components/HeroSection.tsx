@@ -4,10 +4,9 @@ import { t, type Lang } from '@/lib/i18n';
 
 interface HeroSectionProps {
   lang: Lang;
-  onOpenChat: () => void;
 }
 
-export default function HeroSection({ lang, onOpenChat }: HeroSectionProps) {
+export default function HeroSection({ lang }: HeroSectionProps) {
   return (
     <section id="hero" className="hero">
       <div className="hero-bg" />
@@ -24,7 +23,6 @@ export default function HeroSection({ lang, onOpenChat }: HeroSectionProps) {
         <p>{t('hero.subtitle', lang)}</p>
         <div className="hero-buttons">
           <a href="#catalog" className="btn-primary">📚 {t('hero.cta1', lang)}</a>
-          <button className="btn-secondary" onClick={onOpenChat}>🤖 {t('hero.cta2', lang)}</button>
         </div>
         <div className="hero-stats">
           <div className="hero-stat"><h3>15</h3><p>{t('stat.books', lang)}</p></div>
